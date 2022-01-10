@@ -1,5 +1,5 @@
 import { LockTwoTone, UserOutlined } from '@ant-design/icons';
-import { Alert, Button, Card, Col, Form, Input, Row } from 'antd';
+import { Alert, Button, Card, Col, Form, Input, notification, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
@@ -12,10 +12,17 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const [isFailed, setIsFailed] = useState('0');
   const [failedMessage, setFailedMessage] = useState('');
+  const history = useHistory();
   const [form] = Form.useForm();
   const login = values => {
     setLoading(true);
 
+    localStorage.setItem('accessToken', 'this is accesstoken');
+    localStorage.setItem('username', values.username);
+    localStorage.setItem('password', values.password);
+
+    history.push('/products');
+    notification.success({ message: 'Login successfully!' });
     console.log({ values });
   };
 
@@ -83,16 +90,14 @@ const LoginPage = () => {
                         </Link>
                       </Form.Item>
                       <Form.Item>
-                        <NavLink to="/">
-                          <Button
-                            size="large"
-                            type="primary"
-                            block="true"
-                            htmlType="submit"
-                            loading={loading}>
-                            Sign In
-                          </Button>
-                        </NavLink>
+                        <Button
+                          size="large"
+                          type="primary"
+                          block="true"
+                          htmlType="submit"
+                          loading={loading}>
+                          Sign In
+                        </Button>
                       </Form.Item>
                     </Form>
                   </Col>

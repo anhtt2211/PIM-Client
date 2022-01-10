@@ -44,20 +44,10 @@ const adminMenuItems = {
       component: <Dashboard />,
     },
     {
-      name: 'Product',
+      path: '/products',
+      name: 'Products',
       icon: <ShopOutlined />,
-      routes: [
-        {
-          path: '/products/',
-          name: 'Products list',
-          component: <ProductPage />,
-        },
-        {
-          path: '/products/add',
-          name: 'Add product',
-          component: <AddProductPage />,
-        },
-      ],
+      component: <ProductPage />,
     },
   ],
 };

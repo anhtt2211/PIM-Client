@@ -4,6 +4,8 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
 import styles from './index.module.less';
 import products from './products.json';
+import { useDispatch } from 'react-redux';
+import { getProducts } from 'redux/actions/products';
 
 const { Option } = Select;
 const { Search } = Input;
@@ -24,6 +26,7 @@ const mapping = arr => {
 };
 
 const ProductPage = () => {
+  const dispatch = useDispatch();
   const [dataSource, setDataSource] = useState([]);
   const columns = [
     {
@@ -69,6 +72,10 @@ const ProductPage = () => {
       ),
     },
   ];
+
+  useEffect(() => {
+    dispatch(getProducts.getProductsRequest());
+  }, []);
 
   useEffect(() => {
     const data = mapping(products);
